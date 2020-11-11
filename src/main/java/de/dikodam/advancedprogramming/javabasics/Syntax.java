@@ -45,6 +45,7 @@ int[] zahlen = {1, 2, 4, 5, 6};
 // for i in zahlen:
 for (int zahl : zahlen) {
 System.out.println("Zahl zum quadrat ist: " + zahl * zahl);
+
 }
 
 int zaehler = 0;
