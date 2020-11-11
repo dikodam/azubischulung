@@ -2,6 +2,8 @@ package de.dikodam.advancedprogramming.year2017.day01;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class InverseCaptchaTest {
@@ -48,6 +50,18 @@ class InverseCaptchaTest {
 
         // verify
         assertThat(result).isEqualTo(9);
+    }
+
+    @Test
+    void transformInput() {
+        // setup
+        String input = "1122";
+
+        // execute
+        List<Integer> result = InverseCaptcha.transformInput(input);
+
+        // verify
+        assertThat(result).containsExactly(1, 1, 2, 2);
     }
 
 
