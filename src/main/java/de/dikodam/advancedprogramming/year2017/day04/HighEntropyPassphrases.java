@@ -1,8 +1,6 @@
 package de.dikodam.advancedprogramming.year2017.day04;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class HighEntropyPassphrases {
     public static void main(String[] args) {
@@ -10,5 +8,19 @@ public class HighEntropyPassphrases {
 
         boolean warNochNichtDrin = set.add(1);
 
+    }
+
+    static boolean isPassphraseValid(String passphrase) {
+        String[] words = passphrase.split(" ");
+        Set<String> buffer = new HashSet<>();
+
+        for (String word : words) {
+            boolean wasUnique = buffer.add(word);
+            if (!wasUnique) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
