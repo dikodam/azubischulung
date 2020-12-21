@@ -7,6 +7,16 @@ public class NoTimeForATaxicab {
 
     public static void main(String[] args) {
         List<Command> commands = parseInput(Day01Input.getInput());
+
+        Person person = new Person(CardinalDirection.NORD, new Position(0, 0));
+
+        for (Command command : commands) {
+            person.move(command);
+        }
+
+        // TODO position von person rausholen
+        // euklidische distanz zu (0,0) berechnen
+
     }
 
     private static List<Command> parseInput(String input) {
