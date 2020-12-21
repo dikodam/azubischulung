@@ -1,7 +1,9 @@
 package de.dikodam.advancedprogramming.year2016.day01;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class NoTimeForATaxicab {
 
@@ -20,14 +22,11 @@ public class NoTimeForATaxicab {
     }
 
     private static List<Command> parseInput(String input) {
-        List<Command> commands = new ArrayList<>();
         String[] commandStrings = input.split(", ");
-        for (String commandString : commandStrings) {
-            Command command = Command.from(commandString);
-            commands.add(command);
-        }
-        return commands;
+        // Funktion: eingabe: String ausgabe: Command
+        return Arrays
+                .stream(commandStrings)
+                .map(commandString -> Command.from(commandString))
+                .collect(toList());
     }
-
-
 }
