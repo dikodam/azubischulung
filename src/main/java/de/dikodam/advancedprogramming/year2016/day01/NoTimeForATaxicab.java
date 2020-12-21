@@ -8,7 +8,7 @@ public class NoTimeForATaxicab {
     public static void main(String[] args) {
         List<Command> commands = parseInput(Day01Input.getInput());
 
-        Person person = new Person(CardinalDirection.NORD, new Position(0, 0));
+        Person person = new Person(CardinalDirection.NORTH, new Position(0, 0));
 
         for (Command command : commands) {
             person.move(command);
