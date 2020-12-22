@@ -1,9 +1,9 @@
 package de.dikodam.advancedprogramming.year2020.day02;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PasswordPhilosophy {
     public static void main(String[] args) {
@@ -11,17 +11,12 @@ public class PasswordPhilosophy {
 
         List<PasswordAndPhilosophy> passwordsAndPhilosophies = parseInput(input);
 
-        System.out.println("map hat " + passwordsAndPhilosophies.size() + " elemente");
-
-        // { key : value,
-        // key: value     <- Map.Entry
-        // }
 
         // Aufgabe: wie viele Passwörter sind valide
         int counter = 0;
 
         for (PasswordAndPhilosophy passwordAndPhilosophy : passwordsAndPhilosophies) {
-            Password password = passwordAndPhilosophy.getPassword();
+            String password = passwordAndPhilosophy.getPassword();
             Philosophy philosophy = passwordAndPhilosophy.getPhilosophy();
             // wenn passwort valide, counter hochzählen
             if (philosophy.validate(password)) {
@@ -29,7 +24,21 @@ public class PasswordPhilosophy {
             }
         }
 
+        // Aufgabe: wie viele Passwörter sind valide
+        List<PasswordAndPhilosophy> passwordAndPhilosophiesFromStream = parseInputWithStream(input);
+
+        long countFromStreams = passwordAndPhilosophiesFromStream.stream()
+                // .filter(passwordAndPhilosophy -> passwordAndPhilosophy.isValid()) ginge auch
+                .filter(passwordAndPhilosophy -> {
+                    String password = passwordAndPhilosophy.getPassword();
+                    Philosophy philosophy = passwordAndPhilosophy.getPhilosophy();
+                    return philosophy.validate(password);
+                })
+                .count();
+
+
         System.out.println("Aufgabe 1: " + counter);
+        System.out.println("Aufgabe 1 mit Streams: " + countFromStreams);
     }
 
     public static List<PasswordAndPhilosophy> parseInput(String input) {
@@ -40,31 +49,19 @@ public class PasswordPhilosophy {
 
         // zeilen-array zeile für zeile durchgehen, und die paare Password-Philosophy speichern
         for (String zeile : zeilen) {
-            Password password = parsePassword(zeile);
-            Philosophy philosophy = parsePhilosophy(zeile);
-            passwordPhilosophyList.add(new PasswordAndPhilosophy(password, philosophy));
+            PasswordAndPhilosophy passwordAndPhilosophy = PasswordAndPhilosophy.from(zeile);
+            passwordPhilosophyList.add(passwordAndPhilosophy);
         }
         return passwordPhilosophyList;
     }
 
-    public static Philosophy parsePhilosophy(String line) {
-        String[] splitLine = line.split(": ");
-        String philosophy = splitLine[0];
-        String[] splitPhilosophy = philosophy.split(" ");
-        String character = splitPhilosophy[1];
-        String minAndMax = splitPhilosophy[0];
-        String[] splitMinAndMax = minAndMax.split("-");
-        String min = splitMinAndMax[0];
-        String max = splitMinAndMax[1];
-        return new Philosophy(Integer.parseInt(min), Integer.parseInt(max), character.charAt(0));
-    }
+    public static List<PasswordAndPhilosophy> parseInputWithStream(String input) {
+        String[] zeilen = input.split("\n");
 
-    public static Password parsePassword(String line) {
-        String[] splitLine = line.split(": ");
-        String password = splitLine[1];
-        return new Password(password);
+        return Arrays.stream(zeilen)
+                .map(zeile -> PasswordAndPhilosophy.from(zeile))
+                .collect(Collectors.toList());
     }
-
 
     public static String input = "1-13 r: gqdrspndrpsrjfjx\n" +
             "5-16 j: jjjjkjjzjjjjjfjzjjj\n" +

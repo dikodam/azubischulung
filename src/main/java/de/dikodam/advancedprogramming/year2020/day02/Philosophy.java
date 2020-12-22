@@ -26,14 +26,13 @@ public class Philosophy {
         return character;
     }
 
-    public boolean validate(Password password) {
-        String text = password.getPassword(); // "abcde"
+    public boolean validate(String password) {
         int charCount = 0;
 
         // passwort durchgehen
         // einzelne zeichen überprüfen, ob sie mit character übereinstimmen
-        for (int i = 0; i < text.length(); i++) {
-            char buchstabe = text.charAt(i);
+        for (int i = 0; i < password.length(); i++) {
+            char buchstabe = password.charAt(i);
         // wenn sie übereinstimmen, dann charCount hochzählen
             if (buchstabe == character) {
                 charCount += 1;

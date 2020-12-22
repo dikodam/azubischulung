@@ -4,20 +4,39 @@ import java.util.Objects;
 
 public class PasswordAndPhilosophy {
 
-    private final Password password;
-    private final Philosophy philosophy;
+    private final String password;
+    private final Philosophy philosophy; // min, max, char
 
-    public PasswordAndPhilosophy(Password password, Philosophy philosophy) {
+    public static PasswordAndPhilosophy from(String line) {
+        String[] splitLine = line.split(": ");
+        String philosophyString = splitLine[0]; // "1-3 a"
+        String password = splitLine[1];
+        String[] splitPhilosophy = philosophyString.split(" ");
+        String character = splitPhilosophy[1];
+        String minAndMax = splitPhilosophy[0];
+        String[] splitMinAndMax = minAndMax.split("-");
+        String min = splitMinAndMax[0];
+        String max = splitMinAndMax[1];
+        Philosophy philosophy = new Philosophy(Integer.parseInt(min), Integer.parseInt(max), character.charAt(0));
+        return new PasswordAndPhilosophy(password, philosophy);
+    }
+
+
+    public PasswordAndPhilosophy(String password, Philosophy philosophy) {
         this.password = password;
         this.philosophy = philosophy;
     }
 
-    public Password getPassword() {
+    public String getPassword() {
         return password;
     }
 
     public Philosophy getPhilosophy() {
         return philosophy;
+    }
+
+    public boolean isValid() {
+        return philosophy.validate(password);
     }
 
     @Override
