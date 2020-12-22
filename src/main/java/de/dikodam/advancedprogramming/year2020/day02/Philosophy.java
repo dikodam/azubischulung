@@ -26,7 +26,7 @@ public class Philosophy {
         return character;
     }
 
-    public boolean validate(String password) {
+    public boolean validateCountOfCharInRange(String password) {
         int charCount = 0;
 
         // passwort durchgehen
@@ -38,6 +38,12 @@ public class Philosophy {
                 charCount += 1;
             }
         }
+
+        // charCount mit stream
+        int charCountFromStream = (int) password.chars()
+                .filter(passwordChar -> passwordChar == character)
+                .count();
+
         // prüfen, ob charCount zwischen min und max length
         return charCount >= min && charCount <= max;
     }

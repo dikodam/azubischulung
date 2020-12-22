@@ -36,7 +36,7 @@ public class PasswordAndPhilosophy {
     }
 
     public boolean isValid() {
-        return philosophy.validate(password);
+        return philosophy.validateCountOfCharInRange(password);
     }
 
     @Override

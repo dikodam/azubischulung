@@ -19,7 +19,7 @@ public class PasswordPhilosophy {
             String password = passwordAndPhilosophy.getPassword();
             Philosophy philosophy = passwordAndPhilosophy.getPhilosophy();
             // wenn passwort valide, counter hochzählen
-            if (philosophy.validate(password)) {
+            if (philosophy.validateCountOfCharInRange(password)) {
                 counter += 1;
             }
         }
@@ -32,7 +32,7 @@ public class PasswordPhilosophy {
                 .filter(passwordAndPhilosophy -> {
                     String password = passwordAndPhilosophy.getPassword();
                     Philosophy philosophy = passwordAndPhilosophy.getPhilosophy();
-                    return philosophy.validate(password);
+                    return philosophy.validateCountOfCharInRange(password);
                 })
                 .count();
 
