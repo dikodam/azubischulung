@@ -48,6 +48,27 @@ public class Philosophy {
         return charCount >= min && charCount <= max;
     }
 
+    public boolean validateOnePositionOfCharFits(String password) {
+        int pos1 = min;
+        int pos2 = max;
+
+        char firstChar = password.charAt(pos1 - 1);
+        char secondChar = password.charAt(pos2 - 1);
+
+        // ausdruck1 && ausdruck2
+        // gibt true zurück, wenn beide ausdrücke true sind (AND)
+
+        // ausdruck1 || ausdruck2
+        // gibt true zurück, wenn mindestens ein ausdruck true ist (OR)
+
+        // ausdruck1 ^ ausdruck2
+        // gibt true zurück, wenn genau ein ausdruck true zurück (XOR)
+
+        boolean ersterBuchstabePasst = firstChar == character;
+        boolean zweiterBuchstabePasst = secondChar == character;
+        return ersterBuchstabePasst ^ zweiterBuchstabePasst;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

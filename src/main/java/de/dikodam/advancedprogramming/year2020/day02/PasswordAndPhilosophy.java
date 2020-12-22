@@ -35,8 +35,12 @@ public class PasswordAndPhilosophy {
         return philosophy;
     }
 
-    public boolean isValid() {
+    public boolean isValidCountingChars() {
         return philosophy.validateCountOfCharInRange(password);
+    }
+
+    public boolean isValidCheckingPositions()  {
+        return philosophy.validateOnePositionOfCharFits(password);
     }
 
     @Override

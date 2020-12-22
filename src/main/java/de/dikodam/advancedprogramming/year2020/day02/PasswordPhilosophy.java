@@ -11,8 +11,7 @@ public class PasswordPhilosophy {
 
         List<PasswordAndPhilosophy> passwordsAndPhilosophies = parseInput(input);
 
-
-        // Aufgabe: wie viele Passwörter sind valide
+        // Aufgabe 1: wie viele Passwörter sind valide wenn ich Buchstaben zähle
         int counter = 0;
 
         for (PasswordAndPhilosophy passwordAndPhilosophy : passwordsAndPhilosophies) {
@@ -24,11 +23,11 @@ public class PasswordPhilosophy {
             }
         }
 
-        // Aufgabe: wie viele Passwörter sind valide
+        // Aufgabe 1: wie viele Passwörter sind valide wenn ich Buchstaben zähle
         List<PasswordAndPhilosophy> passwordAndPhilosophiesFromStream = parseInputWithStream(input);
 
         long countFromStreams = passwordAndPhilosophiesFromStream.stream()
-                // .filter(passwordAndPhilosophy -> passwordAndPhilosophy.isValid()) ginge auch
+//                 .filter(passwordAndPhilosophy -> passwordAndPhilosophy.isValidCountingChars()) // ginge auch
                 .filter(passwordAndPhilosophy -> {
                     String password = passwordAndPhilosophy.getPassword();
                     Philosophy philosophy = passwordAndPhilosophy.getPhilosophy();
@@ -39,6 +38,20 @@ public class PasswordPhilosophy {
 
         System.out.println("Aufgabe 1: " + counter);
         System.out.println("Aufgabe 1 mit Streams: " + countFromStreams);
+
+        // Aufgabe 2: Wie viele Passwörter sind valide, wenn ich auf die Buchstabenpositionen schaue
+
+        long countAufgabe2 = passwordsAndPhilosophies
+                .stream()
+//                .filter(passwordAndPhilosophy -> {
+//                    String password = passwordAndPhilosophy.getPassword();
+//                    Philosophy philosophy = passwordAndPhilosophy.getPhilosophy();
+//                    return philosophy.validateOnePositionOfCharFits(password);
+//                })
+                .filter(passwordAndPhilosophy -> passwordAndPhilosophy.isValidCheckingPositions())
+                .count();
+
+        System.out.println("Aufgabe 2: " + countAufgabe2);
     }
 
     public static List<PasswordAndPhilosophy> parseInput(String input) {
