@@ -16,9 +16,11 @@ public class NoTimeForATaxicab {
             person.move(command);
         }
 
-        // TODO position von person rausholen
-        // euklidische distanz zu (0,0) berechnen
-
+        Position currentPosition = person.getCurrentPosition();
+        int x = Math.abs(currentPosition.getX());
+        int y = Math.abs(currentPosition.getY());
+        int distance = x + y;
+        System.out.println("task 1: " + distance);
     }
 
     private static List<Command> parseInput(String input) {
