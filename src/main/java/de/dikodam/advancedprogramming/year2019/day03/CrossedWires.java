@@ -14,8 +14,32 @@ public class CrossedWires {
         List<Command> commandsFirstWire = parseLine(inputStrings[0]);
         List<Command> commandsSecondWire = parseLine(inputStrings[1]);
 
-        // Commands interpretieren und daraus eine Liste an Pukten = ein Wire-Objekt machen
+        // Commands interpretieren und daraus eine Liste an Punkten = ein Wire-Objekt machen
 
+
+        Point currentPoint = new Point(0, 0);
+
+        // TODO debug here, check currentPoint
+
+        List<Point> newPoints = new ArrayList<>();
+        for (Command command : commandsFirstWire) {
+            for (int i = 0; i < command.getStepCount(); i++) {
+                Point newPoint = null;
+                if (command.getDirection() == Direction.RIGHT) {
+                    newPoint = new Point(currentPoint.getX() + 1, currentPoint.getY());
+                }
+                if (command.getDirection() == Direction.LEFT) {
+                    newPoint = new Point(currentPoint.getX() - 1, currentPoint.getY());
+                }
+                if (command.getDirection() == Direction.UP) {
+                    newPoint = new Point(currentPoint.getX(), currentPoint.getY() + 1);
+                }
+                if (command.getDirection() == Direction.DOWN) {
+                    newPoint = new Point(currentPoint.getX(), currentPoint.getY() - 1);
+                }
+                newPoints.add(newPoint);
+            }
+        }
 
         // TODO Aufgabe 1:
         // die Schnittpunkte der beiden Wires bestimmen
